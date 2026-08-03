@@ -1,4 +1,4 @@
-# NLP Knowledge Artifact Repository — Week 1
+# NLP Knowledge Artifact Repository
 
 A structured, static-site repository of learning artifacts covering Week 1 NLP concepts: text preprocessing, feature engineering, language representation, and language models. Built as a plain HTML/CSS site so it can be published directly with **GitHub Pages** — no build step required.
 
