@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NLP Knowledge Artifact Repository — Week 1</title>
+    <meta
+      name="description"
+      content="A structured repository of learning artifacts covering text preprocessing, feature engineering, and language representation in NLP."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+    <header class="site-head">
+      <div class="head-inner">
+        <a class="brand" href="index.html">NLP Corpus</a>
+        <button
+          class="navtoggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="siteNav"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="tokennav" id="siteNav">
+          <a href="index.html" class="active">Home</a
+          ><span class="pipe">/</span>
+          <a href="concept-cards.html">Concept&nbsp;Cards</a
+          ><span class="pipe">/</span> <a href="comparisons.html">Comparisons</a
+          ><span class="pipe">/</span> <a href="workflows.html">Workflows</a
+          ><span class="pipe">/</span>
+          <a href="applications.html">Applications</a
+          ><span class="pipe">/</span> <a href="research.html">Research</a
+          ><span class="pipe">/</span>
+          <a href="sustainability.html">Sustainability</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">NLP Knowledge</span>
+        <h1>NLP Decoded <br />Concepts, comparisons, and use cases.</h1>
+        <p class="lede">
+          Before a machine can read a sentence, that sentence is segmented,
+          cleaned, counted, and finally turned into numbers. This repository is
+          a field guide to that journey: how raw text becomes a vector a model
+          can reason over.
+        </p>
+
+        <div class="demo-box">
+          <label for="demoInput"
+            >Try it — type a sentence and watch it move through the
+            pipeline</label
+          >
+          <input
+            type="text"
+            id="demoInput"
+            value="NLP is not that hard!"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="demo-steps">
+            <div class="demo-step">
+              <div class="k">1 · Tokenize (PRE-02)</div>
+              <div class="demo-tokens" id="demoTokens"></div>
+            </div>
+            <div class="demo-step">
+              <div class="k">2 · Lowercase (PRE-03)</div>
+              <div class="demo-tokens" id="demoLower"></div>
+            </div>
+            <div class="demo-step">
+              <div class="k">
+                3 · Bag-of-Words against a 10-word demo vocabulary (FEAT-01)
+              </div>
+              <div class="demo-tokens" id="demoVector"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="wrap">
+        <div class="section">
+          <div class="section-head">
+            <span class="idx">MAP</span>
+            <div>
+              <h2>Repository map</h2>
+              <p>
+                Five sections, one pipeline. Start at Concept Cards for
+                definitions, or jump straight to how the pieces connect.
+              </p>
+            </div>
+          </div>
+          <div class="grid">
+            <a class="tile" href="concept-cards.html">
+              <span class="n">SEC.&nbsp;A · 21 CARDS</span>
+              <h3>Concept Cards</h3>
+              <p>
+                One-page artifacts for every Week 1 term — preprocessing,
+                feature engineering, representation, and language models.
+              </p>
+            </a>
+            <a class="tile" href="comparisons.html">
+              <span class="n">SEC.&nbsp;B · 5 TABLES</span>
+              <h3>Comparative Analysis</h3>
+              <p>
+                Head-to-head tables on mechanism, complexity, strengths,
+                weaknesses, and fit.
+              </p>
+            </a>
+            <a class="tile" href="workflows.html">
+              <span class="n">SEC.&nbsp;C · 3 DIAGRAMS</span>
+              <h3>Workflow Diagrams</h3>
+              <p>
+                The preprocessing pipeline, the feature engineering pipeline,
+                and the full text-to-vector journey.
+              </p>
+            </a>
+            <a class="tile" href="applications.html">
+              <span class="n">SEC.&nbsp;D · 5 CASES</span>
+              <h3>Real-World Applications</h3>
+              <p>
+                Search, chatbots, sentiment analysis, translation, summarization
+                — concepts mapped to products.
+              </p>
+            </a>
+            <a class="tile" href="research.html">
+              <span class="n">SEC.&nbsp;E</span>
+              <h3>Research &amp; Industry Insights</h3>
+              <p>
+                Two research threads, two industrial deployments, one
+                open-source framework.
+              </p>
+            </a>
+            <a class="tile" href="sustainability.html">
+              <span class="n">CLOSING NOTE</span>
+              <h3>NLP &amp; Sustainable Development</h3>
+              <p>
+                How the same techniques narrow — or widen — access to language,
+                education, and services.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <span class="idx">WHY</span>
+            <div><h2>Why a "corpus notebook" instead of a slide deck?</h2></div>
+          </div>
+          <p>
+            NLP is easiest to understand as a chain of transformations applied
+            to text, not as a list of isolated definitions. Every artifact here
+            is written to answer the same five questions a beginner actually
+            asks:
+            <em
+              >what is this, why does it exist, how does it work, when should I
+              reach for it, and what does it cost me?</em
+            >
+            Where a technique only makes sense next to its alternative —
+            stemming beside lemmatization, TF beside TF-IDF — the comparison
+            tables in Section B carry that weight instead of repeating it in
+            every card.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div>
+          NLP Knowledge Artifact Repository — made by Piyush Bedekar and Avadhut
+          Gore.<br />
+          <span
+            class="integrity-note"
+            style="display: inline-block; margin-top: 10px"
+            >Academic integrity note: See
+            <a href="research.html">Section E</a> for cited sources.</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/site.js" defer></script>
+  </body>
+</html>

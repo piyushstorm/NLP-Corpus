@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="21 one-page concept cards covering text preprocessing, feature engineering, language representation, and language models in NLP.">
+<title>Concept Cards · NLP Knowledge Artifact Repository</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="index.html">NLP Corpus</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="tokennav" id="siteNav">
+      <a href="index.html">Home</a><span class="pipe">/</span>
+      <a href="concept-cards.html" class="active">Concept&nbsp;Cards</a><span class="pipe">/</span>
+      <a href="comparisons.html">Comparisons</a><span class="pipe">/</span>
+      <a href="workflows.html">Workflows</a><span class="pipe">/</span>
+      <a href="applications.html">Applications</a><span class="pipe">/</span>
+      <a href="research.html">Research</a><span class="pipe">/</span>
+      <a href="sustainability.html">Sustainability</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:44px 0 30px 0;">
+  <div class="wrap">
+    <span class="eyebrow">Section A</span>
+    <h1>Concept Cards</h1>
+    <p class="lede">Twenty-one one-page artifacts, each answering what the technique is, why it exists, how it works, an example, its trade-offs, and where it shows up. Click a card to expand it, or study the whole set as flashcards.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="toolbar" id="cardToolbar">
+      <input type="search" id="cardSearch" placeholder="Search 21 cards (e.g. &quot;stemming&quot;, &quot;BPE&quot;, &quot;n-gram&quot;)&#8230;" aria-label="Search concept cards">
+      <div class="chip-row" role="group" aria-label="Filter by category">
+        <button class="chip active" type="button" data-cat="all">All</button>
+        <button class="chip" type="button" data-cat="1 · Text Preprocessing">Preprocessing</button>
+        <button class="chip" type="button" data-cat="2 · Feature Engineering">Feature Eng.</button>
+        <button class="chip" type="button" data-cat="3 · Language Representation">Representation</button>
+        <button class="chip" type="button" data-cat="4 · Language Models">Language Models</button>
+      </div>
+      <button class="btn" type="button" id="expandAll">Expand all</button>
+      <button class="btn" type="button" id="collapseAll">Collapse all</button>
+      <button class="btn primary" type="button" id="flashcardTrigger">&#128218; Flashcard mode</button>
+      <span class="count" id="cardCount">Showing 21 of 21</span>
+    </div>
+
+    <!-- ============ TEXT PREPROCESSING ============ -->
+    <div class="cat-label" data-cat="1 · Text Preprocessing">1 · Text Preprocessing</div>
+
+    <details class="card">
+      <summary><span class="tag">PRE-01</span> Sentence Segmentation</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>The task of splitting a block of raw text into individual sentences.</div>
+        <div class="field"><span class="label">Purpose</span>Most downstream NLP steps (parsing, summarization, translation) operate one sentence at a time, so the sentence boundary has to be found first.</div>
+        <div class="field"><span class="label">Working Principle</span>Rule-based splitters look for boundary punctuation (. ! ?) followed by capitalisation, while handling exceptions like abbreviations ("Dr.", "e.g.") and decimal points; statistical/ML splitters instead learn boundary cues from labelled corpora.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "Dr. Rao joined NASA in 2019. She leads the NLP team."
+Output: ["Dr. Rao joined NASA in 2019.", "She leads the NLP team."]</div></div>
+        <div class="field"><span class="label">Advantages</span>Gives every later step a clean, self-contained unit of meaning; simple rule-based versions are fast and need no training data.</div>
+        <div class="field"><span class="label">Limitations</span>Abbreviations, ellipses, URLs, and informal punctuation (emojis, "...") routinely break simple rule-based splitters.</div>
+        <div class="field full"><span class="label">Applications</span>Machine translation, text-to-speech, summarization, and any pipeline that parses grammar sentence-by-sentence.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-02</span> Tokenization</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Breaking text into smaller units — words, sub-words, or characters — called tokens.</div>
+        <div class="field"><span class="label">Purpose</span>Models cannot operate on raw character streams; they need discrete units to count, embed, and process.</div>
+        <div class="field"><span class="label">Working Principle</span>Whitespace/rule-based tokenizers split on spaces and punctuation; sub-word tokenizers (BPE, WordPiece, SentencePiece) learn a vocabulary of frequent character chunks so rare words are broken into known pieces instead of being discarded.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "NLP is not that hard!"
+Output: ["NLP", "is", "not", "that", "hard", "!"]</div></div>
+        <div class="field"><span class="label">Advantages</span>Creates the atomic unit every later technique (BoW, embeddings, transformers) depends on; sub-word schemes handle unseen words gracefully.</div>
+        <div class="field"><span class="label">Limitations</span>Word boundaries are ambiguous in languages without spaces (Chinese, Japanese, Thai); contractions and hyphenation need special handling.</div>
+        <div class="field full"><span class="label">Applications</span>The first step of virtually every NLP pipeline — search engines, chatbots, translators, and large language models.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-03</span> Case Normalization</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Converting all text to a single letter case, almost always lowercase.</div>
+        <div class="field"><span class="label">Purpose</span>Without it, "Apple", "apple", and "APPLE" are treated as three distinct tokens, inflating the vocabulary and splitting statistics that should be shared.</div>
+        <div class="field"><span class="label">Working Principle</span>A direct character-mapping operation (e.g. Python's <code>.lower()</code>) applied uniformly across the corpus, usually right after tokenization.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "Apple released the iPhone. APPLE stock rose."
+Output: "apple released the iphone. apple stock rose."</div></div>
+        <div class="field"><span class="label">Advantages</span>Shrinks vocabulary size and merges duplicate counts, which is especially valuable for frequency-based methods like Bag of Words and TF-IDF.</div>
+        <div class="field"><span class="label">Limitations</span>Destroys information: "Apple" (company) vs "apple" (fruit), or "US" vs "us", becomes indistinguishable — a real cost for Named Entity Recognition.</div>
+        <div class="field full"><span class="label">Applications</span>Search indexing, spam filtering, and any frequency-based feature pipeline where case carries little meaning.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-04</span> Stop-word Removal</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Discarding very common, low-information words (e.g. "the", "is", "and", "of") from the token stream.</div>
+        <div class="field"><span class="label">Purpose</span>These words appear in almost every document and carry little topical signal, so keeping them mostly adds noise and computation.</div>
+        <div class="field"><span class="label">Working Principle</span>Each token is checked against a fixed or corpus-derived stop-word list and dropped if it matches.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  ["the", "cat", "is", "sitting", "on", "the", "mat"]
+Output: ["cat", "sitting", "mat"]</div></div>
+        <div class="field"><span class="label">Advantages</span>Reduces feature-space size and speeds up downstream computation, particularly for Bag of Words and TF-IDF.</div>
+        <div class="field"><span class="label">Limitations</span>Can remove words that matter for meaning or grammar ("not", "no") — a serious problem for sentiment analysis and negation-sensitive tasks; also language- and domain-dependent.</div>
+        <div class="field full"><span class="label">Applications</span>Classical information retrieval, topic modelling, and keyword-based search, though modern embedding-based methods increasingly keep stop-words for context.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-05</span> Stemming</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Chopping word endings using heuristic rules to reduce a word to a rough base or "stem".</div>
+        <div class="field"><span class="label">Purpose</span>Merges inflected forms of a word ("running", "runs", "ran"-ish) so they count as the same feature.</div>
+        <div class="field"><span class="label">Working Principle</span>Rule-based suffix-stripping algorithms (e.g. the Porter Stemmer) apply a cascade of pattern-matching rules like "remove -ing, -ed, -es" without consulting a dictionary or the word's grammatical role.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"studies" → "studi"
+"studying" → "studi"
+"connection", "connected", "connecting" → "connect"</div></div>
+        <div class="field"><span class="label">Advantages</span>Extremely fast, needs no dictionary or context, and works well enough for search/indexing at scale.</div>
+        <div class="field"><span class="label">Limitations</span>The result is often not a real word ("studi"), and unrelated words can collide (over-stemming) while related ones can be missed (under-stemming).</div>
+        <div class="field full"><span class="label">Applications</span>Search engines and information retrieval systems where speed matters more than linguistic precision.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-06</span> Lemmatization</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Reducing a word to its dictionary base form (its "lemma") using vocabulary and grammar rather than raw pattern-cutting.</div>
+        <div class="field"><span class="label">Purpose</span>Achieves the same normalization goal as stemming but keeps the result a valid, meaningful word.</div>
+        <div class="field"><span class="label">Working Principle</span>Uses a lexicon and, typically, part-of-speech information to map a word to its lemma — "better" (adjective) → "good", "running" (verb) → "run" — often via morphological analysis or a lookup dictionary such as WordNet.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"studies" → "study"
+"was", "were", "is" → "be"
+"better" → "good"</div></div>
+        <div class="field"><span class="label">Advantages</span>More linguistically accurate than stemming, produces real words, and preserves meaning distinctions stemming would blur.</div>
+        <div class="field"><span class="label">Limitations</span>Slower, requires POS tagging and a lexical resource, and needs language-specific dictionaries to work well.</div>
+        <div class="field full"><span class="label">Applications</span>Chatbots, question answering, and any task where the readability or grammatical correctness of the normalized form matters.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-07</span> Noise Removal</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Stripping out elements of raw text that are not part of the meaningful language signal — HTML tags, special characters, extra whitespace, boilerplate.</div>
+        <div class="field"><span class="label">Purpose</span>Real-world text (scraped web pages, PDFs, social posts) is full of markup and artefacts that confuse tokenizers and inflate vocabularies.</div>
+        <div class="field"><span class="label">Working Principle</span>Pattern matching and regular expressions (or dedicated parsers, e.g. an HTML parser) identify and delete non-linguistic spans while preserving the surrounding text.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "&lt;p&gt;Great   product!!! 😀 Visit http://shop.example.com&lt;/p&gt;"
+Output: "Great product Visit"</div></div>
+        <div class="field"><span class="label">Advantages</span>Prevents markup and artefacts from being mistaken for vocabulary, improving both accuracy and efficiency downstream.</div>
+        <div class="field"><span class="label">Limitations</span>Aggressive noise removal can delete signal along with noise — emojis and punctuation can carry sentiment, and URLs may be informative for spam detection.</div>
+        <div class="field full"><span class="label">Applications</span>Web-scraped corpora, social-media analytics, and any pipeline ingesting HTML, PDFs, or OCR output.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">PRE-08</span> Text Cleaning</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>The umbrella process that combines noise removal, normalization, and correction steps into a single standardisation pass over raw text.</div>
+        <div class="field"><span class="label">Purpose</span>Ensures every document entering the pipeline follows the same conventions, so later statistical steps compare like with like.</div>
+        <div class="field"><span class="label">Working Principle</span>Chains together sub-steps — lowercasing, punctuation handling, whitespace collapsing, spelling correction, encoding fixes — in a defined, repeatable order.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "I  LOVE   this!!  Itss amazingg :)"
+Output: "i love this it is amazing"</div></div>
+        <div class="field"><span class="label">Advantages</span>Produces a consistent, model-ready corpus and reduces the "garbage in, garbage out" risk that plagues raw-text pipelines.</div>
+        <div class="field"><span class="label">Limitations</span>Over-cleaning can erase stylistic or emotional signal (e.g. repeated letters expressing enthusiasm) that some tasks — like sentiment analysis — actually want to keep.</div>
+        <div class="field full"><span class="label">Applications</span>Any production NLP system as the mandatory first stage before feature engineering or model input.</div>
+      </div></div>
+    </details>
+
+    <!-- ============ FEATURE ENGINEERING ============ -->
+    <div class="cat-label" data-cat="2 · Feature Engineering">2 · Feature Engineering</div>
+
+    <details class="card">
+      <summary><span class="tag">FEAT-01</span> Bag of Words (BoW)</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A representation of text as an unordered collection of word counts, ignoring grammar and word order.</div>
+        <div class="field"><span class="label">Purpose</span>Converts variable-length text into a fixed-length numeric vector that classic machine-learning models can consume.</div>
+        <div class="field"><span class="label">Working Principle</span>Build a vocabulary of all unique words in the corpus, then represent each document as a vector counting how many times each vocabulary word appears in it.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Vocabulary: [cat, sat, mat, dog]
+"the cat sat on the mat" → [1, 1, 1, 0]
+"the dog sat"            → [0, 1, 0, 1]</div></div>
+        <div class="field"><span class="label">Advantages</span>Simple, fast to compute, and works reasonably well for topic-level classification tasks like spam detection.</div>
+        <div class="field"><span class="label">Limitations</span>Discards word order and context ("dog bites man" = "man bites dog"), and produces very high-dimensional, sparse vectors for large vocabularies.</div>
+        <div class="field full"><span class="label">Applications</span>Spam filtering, basic document classification, and as a baseline before trying richer representations.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">FEAT-02</span> N-Grams</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A contiguous sequence of N tokens taken from text (N=1 unigram, N=2 bigram, N=3 trigram, etc.).</div>
+        <div class="field"><span class="label">Purpose</span>Recovers some of the local word-order information that Bag of Words throws away, by treating short word sequences as features in their own right.</div>
+        <div class="field"><span class="label">Working Principle</span>A sliding window of size N moves across the token stream, and every window position becomes one N-gram feature/count.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"I love NLP" 
+Unigrams: [I, love, NLP]
+Bigrams:  [I love, love NLP]</div></div>
+        <div class="field"><span class="label">Advantages</span>Captures short phrases and local word order ("not good" vs "good"), improving results for tasks sensitive to word sequence.</div>
+        <div class="field"><span class="label">Limitations</span>Vocabulary size grows combinatorially as N increases, quickly leading to sparse, memory-hungry feature spaces.</div>
+        <div class="field full"><span class="label">Applications</span>Statistical language models, autocomplete/predictive text, and plagiarism or authorship-style detection.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">FEAT-03</span> Term Frequency (TF)</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A measure of how often a term appears within one specific document, usually normalised by that document's length.</div>
+        <div class="field"><span class="label">Purpose</span>Captures how central a word is to a single document's content — the more a word repeats, the more it likely matters there.</div>
+        <div class="field"><span class="label">Working Principle</span>TF(t, d) = (number of times term t appears in document d) ÷ (total number of terms in d).</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Doc: "the cat sat on the mat" (6 words)
+TF("the") = 2/6 = 0.33
+TF("cat") = 1/6 = 0.17</div></div>
+        <div class="field"><span class="label">Advantages</span>Simple, interpretable, and length-normalised so documents of different sizes remain comparable.</div>
+        <div class="field"><span class="label">Limitations</span>Treats every word equally important as long as it repeats — common words like "the" score highly despite carrying no topical meaning.</div>
+        <div class="field full"><span class="label">Applications</span>The building block of TF-IDF; used wherever within-document word importance needs to be quantified.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">FEAT-04</span> Inverse Document Frequency (IDF)</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A measure of how rare or distinctive a term is across an entire document collection (corpus).</div>
+        <div class="field"><span class="label">Purpose</span>Down-weights words that appear in nearly every document (little discriminative value) and up-weights words that appear in only a few (highly discriminative).</div>
+        <div class="field"><span class="label">Working Principle</span>IDF(t) = log( total number of documents ÷ number of documents containing term t ). Common words get a low score; rare words get a high score.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Corpus of 1,000 docs.
+"the" appears in 950 docs   → IDF ≈ log(1000/950) ≈ 0.02
+"quasar" appears in 3 docs  → IDF ≈ log(1000/3)   ≈ 2.52</div></div>
+        <div class="field"><span class="label">Advantages</span>Automatically identifies which words are actually distinctive for a corpus without any hand-built stop-word list.</div>
+        <div class="field"><span class="label">Limitations</span>Needs the whole corpus statistics up front, so it does not adapt well to a single new document or a streaming setting without recomputation.</div>
+        <div class="field full"><span class="label">Applications</span>Paired with TF to form TF-IDF; used in search-engine relevance ranking and keyword extraction.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">FEAT-05</span> TF-IDF</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A composite score, TF × IDF, that weighs a term by how often it appears in a document and how rare it is across the corpus.</div>
+        <div class="field"><span class="label">Purpose</span>Surfaces the words that are both frequent within a document and distinctive across the collection — the words that actually characterise that document.</div>
+        <div class="field"><span class="label">Working Principle</span>TF-IDF(t, d) = TF(t, d) × IDF(t). A word scores highest when it repeats often in one document but rarely elsewhere.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"the": high TF, near-zero IDF → low TF-IDF (unimportant)
+"quasar": modest TF, high IDF → high TF-IDF (distinctive)</div></div>
+        <div class="field"><span class="label">Advantages</span>Automatically balances frequency against distinctiveness, is cheap to compute, and remains a strong baseline for search and classification.</div>
+        <div class="field"><span class="label">Limitations</span>Still produces sparse, high-dimensional vectors and, like Bag of Words, ignores word order and semantic similarity between related words.</div>
+        <div class="field full"><span class="label">Applications</span>Search-engine ranking, document similarity, keyword extraction, and classic text-classification baselines.</div>
+      </div></div>
+    </details>
+
+    <!-- ============ LANGUAGE REPRESENTATION ============ -->
+    <div class="cat-label" data-cat="3 · Language Representation">3 · Language Representation</div>
+
+    <details class="card">
+      <summary><span class="tag">REP-01</span> One-Hot Encoding</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Representing each word as a vector the size of the vocabulary, with a single 1 at that word's index and 0 everywhere else.</div>
+        <div class="field"><span class="label">Purpose</span>The most basic way to turn categorical, symbolic words into numeric vectors a model can process.</div>
+        <div class="field"><span class="label">Working Principle</span>Assign every vocabulary word a unique index; its vector is all zeros except a 1 at that index.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Vocabulary: [cat, dog, fish]  (size 3)
+"cat"  → [1, 0, 0]
+"dog"  → [0, 1, 0]</div></div>
+        <div class="field"><span class="label">Advantages</span>Trivial to construct and completely unambiguous — every word maps to exactly one vector.</div>
+        <div class="field"><span class="label">Limitations</span>Vector size equals vocabulary size (extremely high-dimensional and sparse), and it treats every pair of words as equally (dis)similar — "cat" and "dog" are as unrelated as "cat" and "sky".</div>
+        <div class="field full"><span class="label">Applications</span>Small, fixed-vocabulary categorical features; largely superseded by embeddings for open-vocabulary language tasks.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">REP-02</span> Word Embeddings</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Dense, low-dimensional vector representations of words learned so that words with similar meaning end up close together in the vector space.</div>
+        <div class="field"><span class="label">Purpose</span>Overcomes one-hot encoding's core weakness by capturing semantic similarity numerically, not just identity.</div>
+        <div class="field"><span class="label">Working Principle</span>A model is trained on large text corpora to predict a word from its context (or vice versa); the internal weights it learns become each word's embedding vector, typically 50–300 dimensions.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">vector("king") - vector("man") + vector("woman") ≈ vector("queen")
+distance(cat, dog) is small; distance(cat, spreadsheet) is large</div></div>
+        <div class="field"><span class="label">Advantages</span>Compact, captures semantic and even analogical relationships, and generalises to unseen combinations of known words.</div>
+        <div class="field"><span class="label">Limitations</span>Traditional embeddings assign one fixed vector per word regardless of context, so a polysemous word like "bank" gets a single blended meaning.</div>
+        <div class="field full"><span class="label">Applications</span>Search relevance, recommendation, clustering, and as the input layer for most modern neural NLP models.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">REP-03</span> Word2Vec</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>A neural technique for learning word embeddings using shallow (single hidden-layer) prediction tasks over local context windows.</div>
+        <div class="field"><span class="label">Purpose</span>Made high-quality, semantically meaningful word embeddings practical to train on very large corpora efficiently.</div>
+        <div class="field"><span class="label">Working Principle</span>Two architectures: CBOW predicts a target word from its surrounding context words, while Skip-gram predicts the surrounding context words from a target word; the hidden-layer weights become the embeddings.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Skip-gram on "the quick brown fox jumps"
+target "brown" → predict {quick, fox} as nearby context</div></div>
+        <div class="field"><span class="label">Advantages</span>Fast to train even on billions of words, and produces embeddings that capture strong semantic and syntactic regularities.</div>
+        <div class="field"><span class="label">Limitations</span>Each word still gets exactly one vector (no context-sensitivity), and it cannot represent words absent from training (out-of-vocabulary problem).</div>
+        <div class="field full"><span class="label">Applications</span>Semantic search, recommendation systems, and as pretrained input embeddings for downstream neural models.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">REP-04</span> FastText</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>An extension of Word2Vec that represents each word as a bag of character N-grams (sub-word units) rather than a single atomic token.</div>
+        <div class="field"><span class="label">Purpose</span>Solves Word2Vec's out-of-vocabulary problem and better handles morphologically rich languages (many prefixes/suffixes).</div>
+        <div class="field"><span class="label">Working Principle</span>A word's embedding is the sum of the embeddings of its constituent character N-grams, so unseen words can still get a reasonable vector built from familiar sub-word pieces.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"apple" (n=3) → &lt;ap, app, ppl, ple, le&gt;
+embedding("apple") = sum of embeddings of these character n-grams</div></div>
+        <div class="field"><span class="label">Advantages</span>Handles rare and unseen words gracefully and captures morphological relationships (e.g. "run", "running", "runner" share sub-word pieces).</div>
+        <div class="field"><span class="label">Limitations</span>Larger model size due to the sub-word vocabulary, and, like Word2Vec, still produces one fixed vector per word without contextual disambiguation.</div>
+        <div class="field full"><span class="label">Applications</span>Morphologically rich languages (e.g. Finnish, Tamil, Turkish), spelling-variant-tolerant search, and low-resource language NLP.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">REP-05</span> Contextual Embeddings</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Word representations that change depending on the surrounding sentence, so the same word gets a different vector in different contexts.</div>
+        <div class="field"><span class="label">Purpose</span>Directly addresses the one-vector-per-word limitation of Word2Vec/FastText by letting meaning vary with context, as it does in real language.</div>
+        <div class="field"><span class="label">Working Principle</span>Deep models (e.g. ELMo's bidirectional LSTMs, or transformer encoders like BERT) process an entire sentence at once, producing a vector for each word that is a function of the whole surrounding sentence, not just the word itself.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"He sat by the river bank."   → embedding("bank") ≈ [financial=low, river=high]
+"He deposited cash at the bank." → embedding("bank") ≈ [financial=high, river=low]</div></div>
+        <div class="field"><span class="label">Advantages</span>Resolves polysemy (multiple word senses) and captures nuanced, sentence-level meaning far beyond static embeddings.</div>
+        <div class="field"><span class="label">Limitations</span>Computationally far more expensive to produce and store than static embeddings, since a word's vector must be recomputed every time its context changes.</div>
+        <div class="field full"><span class="label">Applications</span>Question answering, machine translation, sentiment analysis, and virtually every state-of-the-art NLP system today.</div>
+      </div></div>
+    </details>
+
+    <!-- ============ LANGUAGE MODELS ============ -->
+    <div class="cat-label" data-cat="4 · Language Models">4 · Language Models</div>
+
+    <details class="card">
+      <summary><span class="tag">LM-01</span> Statistical Language Models</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Models that estimate the probability of a word (or sequence) using frequency counts observed directly in a training corpus.</div>
+        <div class="field"><span class="label">Purpose</span>Provide a way to score how "likely" a sentence is, useful for choosing between candidate outputs in speech recognition, translation, or autocomplete.</div>
+        <div class="field"><span class="label">Working Principle</span>N-gram models apply the Markov assumption — a word's probability depends only on the previous N-1 words — and estimate P(word | previous words) from corpus counts, often with smoothing for unseen sequences.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Bigram model: P("world" | "hello") = count("hello world") / count("hello")</div></div>
+        <div class="field"><span class="label">Advantages</span>Simple, interpretable, computationally cheap, and effective for narrow, high-frequency-pattern domains.</div>
+        <div class="field"><span class="label">Limitations</span>Cannot capture long-range dependencies beyond the fixed window N, and probability tables explode in size and sparsity as N grows.</div>
+        <div class="field full"><span class="label">Applications</span>Early speech recognition, spelling correction, and lightweight autocomplete on resource-constrained devices.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">LM-02</span> Neural Language Models</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Models that use neural networks (feed-forward, then recurrent networks such as LSTMs/GRUs) to estimate word probabilities, learning distributed representations rather than relying on raw counts.</div>
+        <div class="field"><span class="label">Purpose</span>Overcome the sparsity and fixed-window limits of statistical N-gram models by generalising across similar words and remembering longer context.</div>
+        <div class="field"><span class="label">Working Principle</span>A neural network (e.g. an LSTM) reads a sequence of word embeddings one step at a time, maintaining an internal hidden state that carries information forward, and predicts the next word's probability distribution at each step.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">Input:  "The cat sat on the ___"
+LSTM hidden state carries context across all prior words →
+predicts "mat" with high probability</div></div>
+        <div class="field"><span class="label">Advantages</span>Captures longer-range dependencies than fixed N-grams and generalises to word combinations never literally seen in training.</div>
+        <div class="field"><span class="label">Limitations</span>Sequential processing is slow to train (each step depends on the previous one) and can still struggle with very long-range dependencies due to vanishing gradients.</div>
+        <div class="field full"><span class="label">Applications</span>Early neural machine translation, text generation, and predictive keyboards before the transformer era.</div>
+      </div></div>
+    </details>
+
+    <details class="card">
+      <summary><span class="tag">LM-03</span> Transformer-based Representations</summary>
+      <div class="card-body"><div class="card-grid">
+        <div class="field"><span class="label">Definition</span>Language representations produced by the transformer architecture, which uses a "self-attention" mechanism to relate every word in a sequence to every other word directly, without sequential recurrence.</div>
+        <div class="field"><span class="label">Purpose</span>Remove the sequential bottleneck of recurrent neural language models and capture long-range dependencies far more effectively, while allowing massive parallel training.</div>
+        <div class="field"><span class="label">Working Principle</span>Self-attention computes, for every word, a weighted combination of all other words in the sequence based on learned relevance scores; stacking many such attention layers (as in BERT, GPT) builds deep, richly contextual representations of an entire input at once.</div>
+        <div class="field"><span class="label">Example</span><div class="example-box">"The animal didn't cross the street because it was too tired."
+Attention links "it" strongly to "animal" (not "street"),
+resolving the reference correctly.</div></div>
+        <div class="field"><span class="label">Advantages</span>State-of-the-art accuracy across nearly all NLP tasks, highly parallelizable training, and representations that are fully contextual.</div>
+        <div class="field"><span class="label">Limitations</span>Very large compute, memory, and data requirements; attention cost grows quadratically with sequence length, making very long documents expensive to process.</div>
+        <div class="field full"><span class="label">Applications</span>Search engines, machine translation, chatbots and virtual assistants, summarization, and the foundation of today's large language models.</div>
+      </div></div>
+    </details>
+
+    <p class="no-results" id="noResults">No cards match that search. Try a different term or clear the category filter.</p>
+
+  </div>
+</main>
+
+<div class="flash-overlay" id="flashOverlay" role="dialog" aria-modal="true" aria-label="Flashcard study mode">
+  <div class="flash-panel">
+    <button class="flash-close" type="button" aria-label="Close flashcards">&#10005;</button>
+    <div class="flash-meta"><span class="cat"></span><span class="pos"></span></div>
+    <div class="flash-card" tabindex="0"></div>
+    <div class="flash-nav">
+      <button class="btn flash-prev" type="button">&#8592; Prev</button>
+      <button class="btn flash-shuffle" type="button">&#8635; Shuffle</button>
+      <button class="btn flash-next" type="button">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>Section A — Concept Cards. <a href="comparisons.html">Next: Comparative Analysis →</a></div>
+    <div><a href="index.html">← Back to repository map</a></div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

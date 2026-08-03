@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Five real-world NLP applications — search, chatbots, sentiment analysis, translation, and summarization — mapped back to the concepts that power them.">
+<title>Real-World Applications · NLP Knowledge Artifact Repository</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="index.html">NLP Corpus</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="tokennav" id="siteNav">
+      <a href="index.html">Home</a><span class="pipe">/</span>
+      <a href="concept-cards.html">Concept&nbsp;Cards</a><span class="pipe">/</span>
+      <a href="comparisons.html">Comparisons</a><span class="pipe">/</span>
+      <a href="workflows.html">Workflows</a><span class="pipe">/</span>
+      <a href="applications.html" class="active">Applications</a><span class="pipe">/</span>
+      <a href="research.html">Research</a><span class="pipe">/</span>
+      <a href="sustainability.html">Sustainability</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:44px 0 30px 0;">
+  <div class="wrap">
+    <span class="eyebrow">Section D</span>
+    <h1>Real-World Applications</h1>
+    <p class="lede">Five products that beginners already use daily, each traced back to the Week 1 concepts quietly running underneath.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="app-card">
+      <span class="n mono" style="color:var(--crimson); font-size:.78rem;">01</span>
+      <h3>Search Engines</h3>
+      <div class="concepts">
+        <span>Tokenization</span><span>Stop-word Removal</span><span>TF-IDF</span><span>Word Embeddings</span><span>Contextual Embeddings</span>
+      </div>
+      <div class="why-benefit">
+        <div class="field"><span class="label">Relevant concepts &amp; why needed</span>A search query and billions of web pages both have to be broken into tokens and turned into comparable vectors before "relevance" can even be defined. TF-IDF ranks pages by distinctive keyword overlap; embeddings let the engine match a query to a page that expresses the same idea in different words.</div>
+        <div class="field"><span class="label">Expected benefits</span>Faster, more relevant results; matches based on meaning rather than exact keyword strings, so a search for "affordable laptops" also surfaces pages that say "budget notebooks".</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <span class="n mono" style="color:var(--crimson); font-size:.78rem;">02</span>
+      <h3>Chatbots &amp; Virtual Assistants</h3>
+      <div class="concepts">
+        <span>Tokenization</span><span>Lemmatization</span><span>Contextual Embeddings</span><span>Transformer-based Representations</span>
+      </div>
+      <div class="why-benefit">
+        <div class="field"><span class="label">Relevant concepts &amp; why needed</span>User messages are informal and grammatically loose, so lemmatization and cleaning normalise phrasing before intent detection. Transformer-based contextual embeddings let the assistant track pronouns and references across a multi-turn conversation ("it", "that one") correctly.</div>
+        <div class="field"><span class="label">Expected benefits</span>More natural, context-aware conversations; fewer misunderstood requests; the ability to handle follow-up questions without the user repeating themselves.</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <span class="n mono" style="color:var(--crimson); font-size:.78rem;">03</span>
+      <h3>Sentiment Analysis</h3>
+      <div class="concepts">
+        <span>Text Cleaning</span><span>N-Grams</span><span>Word Embeddings</span><span>Neural Language Models</span>
+      </div>
+      <div class="why-benefit">
+        <div class="field"><span class="label">Relevant concepts &amp; why needed</span>Cleaning must be careful not to strip emphasis or negation ("not good" is the opposite of "good"), which is exactly why N-grams and context-aware embeddings — not single-word Bag of Words — are preferred here: they preserve the short phrase a sentiment word depends on.</div>
+        <div class="field"><span class="label">Expected benefits</span>Brands and platforms can automatically gauge public opinion on products, reviews, and social posts at a scale no human team could read manually, and react faster to shifting sentiment.</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <span class="n mono" style="color:var(--crimson); font-size:.78rem;">04</span>
+      <h3>Machine Translation</h3>
+      <div class="concepts">
+        <span>Sentence Segmentation</span><span>Tokenization</span><span>Word Embeddings</span><span>Transformer-based Representations</span>
+      </div>
+      <div class="why-benefit">
+        <div class="field"><span class="label">Relevant concepts &amp; why needed</span>Sentence segmentation gives the model a coherent unit to translate at a time; embeddings and transformer attention let the model align meaning across two languages with completely different word order and grammar, rather than translating word-for-word.</div>
+        <div class="field"><span class="label">Expected benefits</span>Fluent, context-appropriate translations that handle idioms and long-range grammatical agreement far better than older phrase-substitution systems.</div>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <span class="n mono" style="color:var(--crimson); font-size:.78rem;">05</span>
+      <h3>Text Summarization</h3>
+      <div class="concepts">
+        <span>Sentence Segmentation</span><span>TF-IDF</span><span>Contextual Embeddings</span><span>Transformer-based Representations</span>
+      </div>
+      <div class="why-benefit">
+        <div class="field"><span class="label">Relevant concepts &amp; why needed</span>Extractive summarizers use TF-IDF-style scoring to rank the most representative sentences in a document; abstractive summarizers use transformer-based contextual understanding to generate new sentences that compress the source's meaning.</div>
+        <div class="field"><span class="label">Expected benefits</span>Turns long articles, meeting transcripts, or research papers into a few readable sentences, saving readers time while retaining the key information.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Section D — Real-World Applications. <a href="research.html">Next: Research &amp; Industry Insights →</a></div>
+    <div><a href="workflows.html">← Back to Workflow Diagrams</a></div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

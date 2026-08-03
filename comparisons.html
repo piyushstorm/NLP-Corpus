@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Five head-to-head comparison tables covering mechanism, complexity, strengths, weaknesses, and best-fit use cases across core Week 1 NLP techniques.">
+<title>Comparative Analysis · NLP Knowledge Artifact Repository</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="index.html">NLP Corpus</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="tokennav" id="siteNav">
+      <a href="index.html">Home</a><span class="pipe">/</span>
+      <a href="concept-cards.html">Concept&nbsp;Cards</a><span class="pipe">/</span>
+      <a href="comparisons.html" class="active">Comparisons</a><span class="pipe">/</span>
+      <a href="workflows.html">Workflows</a><span class="pipe">/</span>
+      <a href="applications.html">Applications</a><span class="pipe">/</span>
+      <a href="research.html">Research</a><span class="pipe">/</span>
+      <a href="sustainability.html">Sustainability</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:44px 0 30px 0;">
+  <div class="wrap">
+    <span class="eyebrow">Section B</span>
+    <h1>Comparative Analysis</h1>
+    <p class="lede">Some concepts are only fully understood next to their alternative. Five head-to-head tables, each scored on mechanism, computational cost, strengths, weaknesses, and best-fit use case.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <caption>1 · Stemming vs Lemmatization</caption>
+        <thead><tr><th>Dimension</th><th>Stemming</th><th>Lemmatization</th></tr></thead>
+        <tbody>
+          <tr><td>Working mechanism</td><td>Rule-based suffix stripping (e.g. Porter's algorithm); no dictionary or grammar involved.</td><td>Dictionary + morphological/POS analysis maps a word to its true lemma.</td></tr>
+          <tr><td>Computational complexity</td><td>Very low — simple string pattern matching, O(length of word).</td><td>Higher — needs POS tagging and lexicon lookup per word.</td></tr>
+          <tr><td>Strengths</td><td>Extremely fast; no external resources required; good enough for bulk indexing.</td><td>Linguistically accurate; output is always a real, readable word.</td></tr>
+          <tr><td>Weaknesses</td><td>Frequently produces non-words ("studi", "argu"); prone to over/under-stemming.</td><td>Slower; requires a language-specific dictionary and correct POS tags to work well.</td></tr>
+          <tr><td>Suitable applications</td><td>Search engines, large-scale indexing, information retrieval.</td><td>Chatbots, question answering, grammar-sensitive or user-facing text.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <caption>2 · TF vs TF-IDF</caption>
+        <thead><tr><th>Dimension</th><th>TF (Term Frequency)</th><th>TF-IDF</th></tr></thead>
+        <tbody>
+          <tr><td>Working mechanism</td><td>Counts how often a term appears within a single document, normalised by document length.</td><td>Multiplies TF by IDF, so a term's score also depends on how rare it is across the whole corpus.</td></tr>
+          <tr><td>Computational complexity</td><td>Low — one pass over each document.</td><td>Slightly higher — requires a corpus-wide document-frequency count in addition to per-document TF.</td></tr>
+          <tr><td>Strengths</td><td>Simple, cheap, and reflects a word's local importance.</td><td>Automatically down-weights generic words and highlights genuinely distinctive terms.</td></tr>
+          <tr><td>Weaknesses</td><td>Cannot tell a genuinely important word from a merely common one (e.g. "the" scores high).</td><td>Still ignores word order and semantics; needs the full corpus recomputed if new documents are added.</td></tr>
+          <tr><td>Suitable applications</td><td>Quick within-document frequency analysis, word clouds.</td><td>Search-engine ranking, keyword extraction, text-classification baselines.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <caption>3 · Word2Vec vs FastText</caption>
+        <thead><tr><th>Dimension</th><th>Word2Vec</th><th>FastText</th></tr></thead>
+        <tbody>
+          <tr><td>Working mechanism</td><td>Learns one dense vector per whole word via CBOW or Skip-gram context prediction.</td><td>Represents a word as the sum of its character N-gram (sub-word) vectors, then trains those with a Word2Vec-style objective.</td></tr>
+          <tr><td>Computational complexity</td><td>Moderate; vocabulary-sized embedding matrix.</td><td>Higher training and storage cost due to the larger sub-word N-gram vocabulary.</td></tr>
+          <tr><td>Strengths</td><td>Fast to train, strong semantic and analogical structure for common words.</td><td>Handles rare, misspelled, and unseen (out-of-vocabulary) words; strong for morphologically rich languages.</td></tr>
+          <tr><td>Weaknesses</td><td>Fails on out-of-vocabulary words; one fixed vector per word regardless of context.</td><td>Larger model size; still produces one fixed vector per word (no context sensitivity).</td></tr>
+          <tr><td>Suitable applications</td><td>Semantic search and recommendation on well-resourced languages with clean vocabularies.</td><td>Low-resource and morphologically rich languages, spelling-variant-tolerant search.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <caption>4 · Statistical vs Neural Language Models</caption>
+        <thead><tr><th>Dimension</th><th>Statistical (N-gram) LMs</th><th>Neural LMs</th></tr></thead>
+        <tbody>
+          <tr><td>Working mechanism</td><td>Estimate next-word probability from raw N-gram frequency counts under the Markov assumption.</td><td>Use neural networks (RNN/LSTM, later transformers) to learn distributed representations and predict probabilities.</td></tr>
+          <tr><td>Computational complexity</td><td>Low to train; probability tables grow sparse and huge as N increases.</td><td>High — requires substantial compute and data, especially at transformer scale.</td></tr>
+          <tr><td>Strengths</td><td>Simple, interpretable, cheap, effective for narrow and high-frequency patterns.</td><td>Generalises to unseen word combinations; captures long-range context and semantics.</td></tr>
+          <tr><td>Weaknesses</td><td>Cannot capture dependencies beyond the fixed window; severe data sparsity at higher N.</td><td>Expensive to train and run; less interpretable ("black box") behaviour.</td></tr>
+          <tr><td>Suitable applications</td><td>Lightweight, resource-constrained settings (basic spelling correction, small autocomplete).</td><td>Machine translation, chatbots, summarization, and modern large language models.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="cmp">
+        <caption>5 · One-Hot Encoding vs Word Embeddings</caption>
+        <thead><tr><th>Dimension</th><th>One-Hot Encoding</th><th>Word Embeddings</th></tr></thead>
+        <tbody>
+          <tr><td>Working mechanism</td><td>Each word gets a vector of vocabulary length with a single 1 marking its index.</td><td>Each word gets a dense, low-dimensional vector learned so that similar words sit close together.</td></tr>
+          <tr><td>Computational complexity</td><td>Trivial to construct, but vector size scales with vocabulary (very high-dimensional).</td><td>Requires training (or loading a pretrained model), but produces compact, fixed-size vectors (e.g. 100–300 dims).</td></tr>
+          <tr><td>Strengths</td><td>Simple, unambiguous, no training needed.</td><td>Captures semantic similarity and analogy; generalises across related words.</td></tr>
+          <tr><td>Weaknesses</td><td>Extremely sparse and high-dimensional; treats all word pairs as equally unrelated.</td><td>Needs a training corpus and compute; static embeddings still miss context-dependent meaning.</td></tr>
+          <tr><td>Suitable applications</td><td>Small, fixed categorical vocabularies (e.g. labels, tags).</td><td>Open-vocabulary language tasks — search, recommendation, and as neural model input.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Section B — Comparative Analysis. <a href="workflows.html">Next: Workflow Diagrams →</a></div>
+    <div><a href="concept-cards.html">← Back to Concept Cards</a></div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

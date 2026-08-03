@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Two current research directions, two industrial NLP deployments, one open-source framework, and the sources consulted for this repository.">
+<title>Research &amp; Industry Insights · NLP Knowledge Artifact Repository</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="index.html">NLP Corpus</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="tokennav" id="siteNav">
+      <a href="index.html">Home</a><span class="pipe">/</span>
+      <a href="concept-cards.html">Concept&nbsp;Cards</a><span class="pipe">/</span>
+      <a href="comparisons.html">Comparisons</a><span class="pipe">/</span>
+      <a href="workflows.html">Workflows</a><span class="pipe">/</span>
+      <a href="applications.html">Applications</a><span class="pipe">/</span>
+      <a href="research.html" class="active">Research</a><span class="pipe">/</span>
+      <a href="sustainability.html">Sustainability</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:44px 0 30px 0;">
+  <div class="wrap">
+    <span class="eyebrow">Section E</span>
+    <h1>Research &amp; Industry Insights</h1>
+    <p class="lede">Two current research threads, two industrial deployments, and one open-source framework that ties Week 1's concepts directly to production code.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="cat-label">Recent research developments</div>
+
+    <div class="research-item">
+      <span class="kind">Research · 2026</span>
+      <h3>Retrieval-Augmented Generation (RAG) as a core NLP architecture</h3>
+      <p>Recent NLP research increasingly treats retrieval-augmented generation as a standard building block for large language models: rather than relying only on knowledge memorised during training, a system first retrieves relevant passages from an external document collection and then generates its answer conditioned on that retrieved text. This directly extends Week 1's TF-IDF and vector-representation ideas — retrieval still depends on turning documents and queries into comparable vectors — while adding a generative model on top to produce fluent, grounded answers.</p>
+      <div class="src">Relevance: shows why "text → vector" (Section C.3) is not just an academic exercise — it is the retrieval half of every modern RAG system, directly downstream of TF-IDF/embeddings.</div>
+    </div>
+
+    <div class="research-item">
+      <span class="kind">Research · 2026</span>
+      <h3>Tokenization design measurably affects model performance</h3>
+      <p>A 2026 study catalogued in the ACL Anthology examined how orthographic marks such as Arabic diacritics interact with sub-word tokenization, finding that their presence can increase how much a word gets fragmented into sub-word pieces, which in turn can degrade performance on downstream language tasks. The finding reinforces a core Week 1 idea: tokenization (PRE-02) is not a neutral, solved step — the choice of tokenizer and how it handles a language's script has measurable downstream consequences for every model built on top of it.</p>
+      <div class="src">Relevance: validates why this repository treats Tokenization as its own concept card rather than an implementation detail — the choice has real accuracy consequences, especially for non-English and morphologically rich languages (see FastText, REP-04).</div>
+    </div>
+
+    <div class="cat-label">Industrial applications</div>
+
+    <div class="research-item">
+      <span class="kind">Industry</span>
+      <h3>Transformer-based digital assistants</h3>
+      <p>Consumer digital assistants rely on large language models and encoder-only transformer systems such as BERT to understand spoken and typed requests, supporting tasks from machine translation and information retrieval to sentiment analysis and question answering within a single assistant. This is Week 1's full pipeline in production: audio or text is tokenized, normalised, embedded, and passed through a transformer to recover intent.</p>
+      <div class="src">Relevance: a direct industrial instance of Section D's "Chatbots &amp; Virtual Assistants" application.</div>
+    </div>
+
+    <div class="research-item">
+      <span class="kind">Industry</span>
+      <h3>RAG-powered enterprise search and support</h3>
+      <p>Businesses are increasingly deploying retrieval-augmented generation to power internal knowledge assistants and customer-support tools: a support query is matched against a company's document base (using the same vectorisation ideas as Section C.3) and a generative model then drafts a grounded, context-aware response instead of a generic canned answer.</p>
+      <div class="src">Relevance: a direct industrial instance of Section D's "Search Engines" application, extended with a generative layer.</div>
+    </div>
+
+    <div class="cat-label">Open-source NLP framework</div>
+
+    <div class="research-item">
+      <span class="kind">Framework</span>
+      <h3>spaCy</h3>
+      <p>spaCy is a widely used, production-oriented open-source NLP library for Python that implements almost every Section A concept out of the box: fast rule-based and statistical tokenization, sentence segmentation, lemmatization, part-of-speech tagging, stop-word lists, and pretrained word and contextual embeddings, all through a single processing pipeline object. A beginner can run <code class="mono">nlp("The cats were running.")</code> and directly inspect the tokens, lemmas, and vectors this repository describes conceptually, which makes it a natural companion tool for turning Section A's definitions into working code. Hugging Face's <code class="mono">transformers</code> library is a common companion for the transformer-based representations (LM-03) covered later in the curriculum.</p>
+      <div class="src">Relevance: bridges every concept card in Section A to runnable code in a handful of lines.</div>
+    </div>
+
+    <div class="section" style="margin-top:50px;">
+      <div class="section-head">
+        <span class="idx">SRC</span>
+        <div><h2>Sources consulted</h2><p>External sources referenced while drafting this section. Content above is paraphrased in the team's own words; consult the originals for direct quotations or further detail.</p></div>
+      </div>
+      <ul style="color:var(--ink-soft); font-size:.92rem;">
+        <li>ACL Anthology — Findings of the Association for Computational Linguistics (2026): <a href="https://aclanthology.org/events/findings-2026/" target="_blank" rel="noopener">aclanthology.org/events/findings-2026</a></li>
+        <li>Ekbal et al., "An Overview of Recent Advances in Natural Language Processing for Information Systems," MDPI (2026): <a href="https://www.mdpi.com/2076-3417/16/2/1122" target="_blank" rel="noopener">mdpi.com/2076-3417/16/2/1122</a></li>
+        <li>"Advancements in Natural Language Processing (NLP) in 2026: Tools, Trends, and AI Applications": <a href="https://graffersid.com/advancements-in-natural-language-processing-nlp/" target="_blank" rel="noopener">graffersid.com/advancements-in-natural-language-processing-nlp</a></li>
+        <li>spaCy documentation: <a href="https://spacy.io" target="_blank" rel="noopener">spacy.io</a> · Hugging Face Transformers documentation: <a href="https://huggingface.co/docs/transformers" target="_blank" rel="noopener">huggingface.co/docs/transformers</a></li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Section E — Research &amp; Industry Insights. <a href="sustainability.html">Next: NLP &amp; Sustainability →</a></div>
+    <div><a href="applications.html">← Back to Applications</a></div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

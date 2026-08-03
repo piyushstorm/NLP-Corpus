@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Three annotated SVG workflow diagrams: the text preprocessing pipeline, the feature engineering pipeline, and the full text-to-vector journey.">
+<title>Workflow Diagrams · NLP Knowledge Artifact Repository</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2718%27 fill=%27%2323261F%27/%3E%3Ctext x=%2750%25%27 y=%2758%25%27 font-family=%27monospace%27 font-size=%2748%27 font-weight=%27700%27 fill=%27%23E7E2D3%27 text-anchor=%27middle%27%3E[%2F]%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="index.html">NLP Corpus</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="tokennav" id="siteNav">
+      <a href="index.html">Home</a><span class="pipe">/</span>
+      <a href="concept-cards.html">Concept&nbsp;Cards</a><span class="pipe">/</span>
+      <a href="comparisons.html">Comparisons</a><span class="pipe">/</span>
+      <a href="workflows.html" class="active">Workflows</a><span class="pipe">/</span>
+      <a href="applications.html">Applications</a><span class="pipe">/</span>
+      <a href="research.html">Research</a><span class="pipe">/</span>
+      <a href="sustainability.html">Sustainability</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:44px 0 30px 0;">
+  <div class="wrap">
+    <span class="eyebrow">Section C</span>
+    <h1>Workflow Diagrams</h1>
+    <p class="lede">Three views of the same journey, zoomed to different levels: cleaning the text, engineering features from it, and — pulled all the way back — the full fork between sparse and dense vector representations. Diagrams scroll horizontally on narrow screens.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="section">
+      <div class="section-head">
+        <span class="idx">C.1</span>
+        <div><h2>Complete Text Preprocessing Pipeline</h2><p>Raw text passes through eight ordered stages before it is considered "clean" and ready for feature engineering. Order matters — segmentation and tokenization must happen before normalization or removal steps can operate on individual words.</p></div>
+      </div>
+      <div class="diagram-box" style="overflow-x:auto;">
+        <img src="assets/diagrams/preprocessing-pipeline.svg" alt="Flow diagram: Raw Text to Sentence Segmentation to Tokenization to Case Normalization to Stop-word Removal to Stemming/Lemmatization to Noise Removal to Clean Tokens" style="min-width:820px;">
+        <div class="cap">Fig. C.1 — Text Preprocessing Pipeline (Section A, PRE-01 → PRE-08).</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="idx">C.2</span>
+        <div><h2>Feature Engineering Pipeline</h2><p>Once tokens are clean, they are counted and weighted into numeric features. Bag of Words / N-Grams supply raw counts; TF and IDF are combined into TF-IDF, the most common classical feature weighting scheme.</p></div>
+      </div>
+      <div class="diagram-box" style="overflow-x:auto;">
+        <img src="assets/diagrams/feature-engineering-pipeline.svg" alt="Flow diagram: Clean Tokens to Bag of Words/N-Grams to Term Frequency to Inverse Document Frequency to TF-IDF Weighting to Feature Vector" style="min-width:700px;">
+        <div class="cap">Fig. C.2 — Feature Engineering Pipeline (Section A, FEAT-01 → FEAT-05).</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="idx">C.3</span>
+        <div><h2>Text-to-Vector Transformation Process</h2><p>Zoomed out, every technique in this repository is one of two forks after preprocessing: a <strong>sparse path</strong> (Bag of Words, N-Grams, TF-IDF — counting-based, high-dimensional, mostly zeros) or a <strong>dense path</strong> (Word2Vec, FastText, contextual embeddings — learned, low-dimensional, semantically packed). Both forks converge on the same destination: a numeric vector a model can consume.</p></div>
+      </div>
+      <div class="diagram-box" style="overflow-x:auto;">
+        <img src="assets/diagrams/text-to-vector.svg" alt="Branching diagram: Raw Text to Preprocessing to Tokens, then forking into a sparse path (Bag of Words/TF-IDF to Sparse Vector) and a dense path (Word2Vec/FastText/Contextual Embeddings to Dense Vector), converging into Vector Representation to Model Input" style="min-width:980px;">
+        <div class="cap">Fig. C.3 — Text-to-Vector Transformation Process, showing the sparse/dense fork.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Section C — Workflow Diagrams. <a href="applications.html">Next: Real-World Applications →</a></div>
+    <div><a href="comparisons.html">← Back to Comparisons</a></div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>
